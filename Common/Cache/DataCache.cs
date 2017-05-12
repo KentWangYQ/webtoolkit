@@ -24,6 +24,12 @@ namespace Common
             return HttpRuntime.Cache.Get(key);
         }
 
+        public static void InsertDefault(string key, Object value)
+        {
+            if (enabled)
+                HttpRuntime.Cache.Insert(key, value, null, DateTime.UtcNow.AddSeconds(CommonConstants.DataCacheDuration), TimeSpan.Zero);
+        }
+
         public static void Insert(string key, Object value)
         {
             if (enabled)

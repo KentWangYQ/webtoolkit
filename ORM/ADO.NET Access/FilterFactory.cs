@@ -42,5 +42,18 @@ namespace ORM
             }
             return paramList.ToArray<SqlParameter>();
         }
+
+        public static string CacheKeyCreator(string Category, IFilterCondition Filter)
+        {
+            string key = Category;
+
+            foreach (var property in Filter.GetType().GetProperties())
+            {
+                var value = property.GetValue(Filter);
+                if (value != null)
+                    key += string.Format("_{0}-{1}", property.Name, value);
+            }
+            return key;
+        }
     }
 }
