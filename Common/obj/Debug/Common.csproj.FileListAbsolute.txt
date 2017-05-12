@@ -48,3 +48,10 @@ F:\Source Code\Projects\DataPlatform\Common\bin\Debug\Newtonsoft.Json.dll
 F:\Source Code\Projects\DataPlatform\Common\bin\Debug\Newtonsoft.Json.xml
 F:\Source Code\Projects\DataPlatform\Common\obj\Debug\Common.dll
 F:\Source Code\Projects\DataPlatform\Common\obj\Debug\Common.pdb
+F:\Source Code\git\BaseCode\Common\bin\Debug\Common.dll.config
+F:\Source Code\git\BaseCode\Common\bin\Debug\Common.dll
+F:\Source Code\git\BaseCode\Common\bin\Debug\Common.pdb
+F:\Source Code\git\BaseCode\Common\bin\Debug\Newtonsoft.Json.dll
+F:\Source Code\git\BaseCode\Common\bin\Debug\Newtonsoft.Json.xml
+F:\Source Code\git\BaseCode\Common\obj\Debug\Common.dll
+F:\Source Code\git\BaseCode\Common\obj\Debug\Common.pdb

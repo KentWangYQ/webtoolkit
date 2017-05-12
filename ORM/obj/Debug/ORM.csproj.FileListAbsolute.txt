@@ -62,3 +62,14 @@ F:\Source Code\Projects\DataPlatform\ORM\bin\Debug\Newtonsoft.Json.xml
 F:\Source Code\Projects\DataPlatform\ORM\obj\Debug\ORM.csprojResolveAssemblyReference.cache
 F:\Source Code\Projects\DataPlatform\ORM\obj\Debug\ORM.dll
 F:\Source Code\Projects\DataPlatform\ORM\obj\Debug\ORM.pdb
+F:\Source Code\git\BaseCode\ORM\bin\Debug\ORM.dll
+F:\Source Code\git\BaseCode\ORM\bin\Debug\ORM.pdb
+F:\Source Code\git\BaseCode\ORM\bin\Debug\Common.dll
+F:\Source Code\git\BaseCode\ORM\bin\Debug\Newtonsoft.Json.dll
+F:\Source Code\git\BaseCode\ORM\bin\Debug\Common.pdb
+F:\Source Code\git\BaseCode\ORM\bin\Debug\Newtonsoft.Json.xml
+F:\Source Code\git\BaseCode\ORM\obj\Debug\ORM.csprojResolveAssemblyReference.cache
+F:\Source Code\git\BaseCode\ORM\obj\Debug\ORM.dll
+F:\Source Code\git\BaseCode\ORM\obj\Debug\ORM.pdb
+F:\Source Code\git\BaseCode\ORM\bin\Debug\ORM.dll.config
+F:\Source Code\git\BaseCode\ORM\bin\Debug\MySql.Data.dll
