@@ -10,6 +10,7 @@ namespace Common
 {
     public class CollectionCache
     {
+        private static bool enabled = System.Configuration.ConfigurationManager.AppSettings["DataCacheEnabled"].ToLower().Equals("true");
         private static readonly object CacheLocker = new object();
         private static DateTime CleanTime = DateTime.UtcNow;
         private static int CleanInterval = 1800;           //30 Mins
@@ -26,40 +27,50 @@ namespace Common
 
             return result.Select(v => v.Value);
         }
-
+        public static void InsertDefault(string cacheKey, string valueKey, Object value)
+        {
+            if (enabled)
+                Insert(cacheKey, valueKey, value, TimeSpan.FromSeconds(CommonConstants.DataCacheDuration));
+        }
         public static void Insert(string cacheKey, string valueKey, Object value, DateTime absoluteExpiration)
         {
-            Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, absoluteExpiration, Cache.NoSlidingExpiration);
+            if (enabled)
+                Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, absoluteExpiration, Cache.NoSlidingExpiration);
         }
         public static void Insert(string cacheKey, string valueKey, Object value, TimeSpan slidingExpiration)
         {
-            Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, Cache.NoAbsoluteExpiration, slidingExpiration);
+            if (enabled)
+                Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, Cache.NoAbsoluteExpiration, slidingExpiration);
         }
 
 
         public static void Insert(string cacheKey, string valueKey, Object value, DateTime absoluteExpiration, TimeSpan slidingExpiration)
         {
-            Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, absoluteExpiration, slidingExpiration);
+            if (enabled)
+                Insert(cacheKey, Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration, valueKey, value, absoluteExpiration, slidingExpiration);
         }
 
         public static void Insert(string cacheKey, DateTime collectionAbsoluteExpiration, TimeSpan collectionSlidingExpiration, string valueKey, Object value, DateTime absoluteExpiration, TimeSpan slidingExpiration)
         {
-            var data = DataCache.Get(cacheKey) as IList<CacheModel>;
-            if (data == null)
+            if (enabled)
             {
-                data = new List<CacheModel>();
-                DataCache.Insert(cacheKey, data, collectionAbsoluteExpiration, collectionSlidingExpiration);
-            }
+                var data = DataCache.Get(cacheKey) as IList<CacheModel>;
+                if (data == null)
+                {
+                    data = new List<CacheModel>();
+                    DataCache.Insert(cacheKey, data, collectionAbsoluteExpiration, collectionSlidingExpiration);
+                }
 
-            lock (CacheLocker)
-            {
-                data.Add(new CacheModel() { Key = valueKey, Value = value, InsertTime = DateTime.UtcNow, AbsoluteExpiration = absoluteExpiration.ToUniversalTime(), SlidingExpiration = slidingExpiration });
-            }
+                lock (CacheLocker)
+                {
+                    data.Add(new CacheModel() { Key = valueKey, Value = value, InsertTime = DateTime.UtcNow, AbsoluteExpiration = absoluteExpiration.ToUniversalTime(), SlidingExpiration = slidingExpiration });
+                }
 
-            //Periodic Cleanup
-            if (CleanTime.AddSeconds(CleanInterval) <= DateTime.Now)
-            {
-                new Thread(Clean).Start();
+                //Periodic Cleanup
+                if (CleanTime.AddSeconds(CleanInterval) <= DateTime.Now)
+                {
+                    new Thread(Clean).Start();
+                }
             }
         }
 
